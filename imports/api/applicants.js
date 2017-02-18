@@ -17,7 +17,8 @@ export const Applicants = new Mongo.Collection('applicants');
 const STATUS = {
   pending: 'Pending',
   accepted: 'Accepted',
-  rejected: 'Rejected'
+  rejected: 'Rejected',
+  noShow: 'No-Show'
 }
 
 if (Meteor.isServer) {
