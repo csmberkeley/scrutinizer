@@ -19,6 +19,9 @@
 .rejected {
   background-color: #FFCCBC !important;
 }
+.reset {
+  background-color: #FFA500 !important;
+}
 .show-toggles span {
   margin-right: 24px;
 }
