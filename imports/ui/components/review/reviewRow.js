@@ -100,5 +100,36 @@ Template.reviewRow.events({
     instance.currStatus.set('rejected');
     instance.showMore.set(false);
   },
+  'click .noShow'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'No-Show'
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Saved no-show', 4000);
+      }
+    });
+    instance.currStatus.set('No-Show');
+    instance.showMore.set(false);
+  },
+
+  'click .reset'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'Pending'
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Saved Reset', 4000);
+      }
+    });
+    instance.currStatus.set('Pending');
+    instance.showMore.set(false);
+  }
 });
 
