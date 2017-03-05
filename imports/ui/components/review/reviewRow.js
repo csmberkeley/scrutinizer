@@ -115,7 +115,6 @@ Template.reviewRow.events({
     instance.currStatus.set('No-Show');
     instance.showMore.set(false);
   },
-
   'click .reset'(event, instance) {
     Meteor.call('applicants.setStatus', {
       id: this._id,
