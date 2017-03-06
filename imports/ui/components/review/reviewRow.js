@@ -100,5 +100,20 @@ Template.reviewRow.events({
     instance.currStatus.set('rejected');
     instance.showMore.set(false);
   },
+  'click .reset'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'pending'
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Succesfully Reset', 4000);
+      }
+    });
+    instance.currStatus.set('pending');
+    instance.showMore.set(false);
+  }
 });
 

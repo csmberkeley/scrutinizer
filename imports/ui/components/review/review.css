@@ -4,6 +4,9 @@
   font-size: 0.8rem;
   font-weight: 500;
 }
+.reset {
+  background-color: #FF7F50 !important;
+}
 .reject {
   background-color: #B71C1C !important;
 }
