@@ -23,7 +23,7 @@ Template.reviewRow.helpers({
   },
   statusClass() {
     const status = Template.instance().currStatus.get();
-    if (status === 'accepted' || status === 'rejected') {
+    if (status === 'accepted' || status === 'rejected' || status === 'No-Show') {
       return status;
     } else {
       return '';
@@ -100,5 +100,40 @@ Template.reviewRow.events({
     instance.currStatus.set('rejected');
     instance.showMore.set(false);
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22f9f6b02f4f30b5bd2f31eea3d126043b79cae5
+  'click .noShow'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'No-Show'
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Saved no-show', 4000);
+      }
+    });
+    instance.currStatus.set('No-Show');
+    instance.showMore.set(false);
+  },
+
+  'click .reset'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'Pending'
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Saved Reset', 4000);
+      }
+    });
+    instance.currStatus.set('Pending');
+    instance.showMore.set(false);
+  }
 });
 
