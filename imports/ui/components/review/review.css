@@ -7,6 +7,12 @@
 .reject {
   background-color: #B71C1C !important;
 }
+.noShow {
+  background-color: #e6e600 !important;
+}
+.No-Show {
+  background-color: #e6e600 !important;
+}
 .accepted {
   background-color: #DCEDC8 !important;
 }
