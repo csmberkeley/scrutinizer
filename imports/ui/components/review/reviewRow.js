@@ -23,11 +23,15 @@ Template.reviewRow.helpers({
   },
   statusClass() {
     const status = Template.instance().currStatus.get();
-    if (status === 'accepted' || status === 'rejected') {
+    if (status === 'accepted' || status === 'rejected' || status === 'no-show') {
       return status;
     } else {
       return '';
     }
+  },
+  checkNoShow() {
+    const status = Template.instance().currStatus.get();
+    return status === 'no-show';
   },
   formattedScores() {
     var ret = '';

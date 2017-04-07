@@ -127,21 +127,27 @@ Template.interview.events({
     });
   },
   'click .noShow'(event, instance) {
-    if ($('#notes').val().includes("No Show")) {
-      finalNotes = $('#notes').val();
-    } else {
-      finalNotes = $('#notes').val() + "No Show";
-    }
     Meteor.call('interviewing.upsert', {
       applicant_id: instance.applicant.get('id'),
       role: instance.role.get(),
-      score: 3,
+      score: 0,
       notes: finalNotes
     }, function(err) {
       if (err) {
         Materialize.toast(err.reason, 4000);
       } else {
         Materialize.toast('Set status to No Show', 2000);
+      }
+    });
+    Meteor.call('applicants.setStatus', {
+      id: instance.applicant.get('id'),
+      role: instance.role.get(),
+      status: 'no-show',
+    }, function(err) {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Done', 2000);
       }
     });
   },

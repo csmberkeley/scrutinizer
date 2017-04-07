@@ -1,6 +1,11 @@
 <template name="reviewRow">
   <tr class="table-row {{statusClass}}">
-    <td><b>{{formattedScores}}</b></td>
+    <td>
+    <b>{{formattedScores}}</b>
+    {{#if checkNoShow}}
+      <b style = "color: red">(No-Show)</b>
+    {{/if}}
+    </td>
     <td>{{name}}</td>
     <td>{{_id}}</td>
     <td>{{year}}</td>
