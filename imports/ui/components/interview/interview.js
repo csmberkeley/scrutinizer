@@ -131,14 +131,17 @@ Template.interview.events({
       applicant_id: instance.applicant.get('id'),
       role: instance.role.get(),
       score: 0,
-      notes: finalNotes
+      notes: $('#notes').val(),
     }, function(err) {
       if (err) {
         Materialize.toast(err.reason, 4000);
       } else {
-        Materialize.toast('Set status to No Show', 2000);
+        Materialize.toast('Score Changed', 2000);
       }
     });
+    // Sets the score for the Interviewer and updates bar.
+    instance.interviewing.set('score', 0);
+    $('#score').val(0);
     Meteor.call('applicants.setStatus', {
       id: instance.applicant.get('id'),
       role: instance.role.get(),
@@ -147,7 +150,7 @@ Template.interview.events({
       if (err) {
         Materialize.toast(err.reason, 4000);
       } else {
-        Materialize.toast('Done', 2000);
+        Materialize.toast('Set status to No Show', 2000);
       }
     });
   },
