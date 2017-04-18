@@ -74,7 +74,7 @@ Template.interview.helpers({
     }
   },
   questions() {
-    return Questions.find({$or: [{role: Template.instance().role.get()}, {role: ''}]}, {sort: {category: -1, priority: -1}})
+    return Questions.find({$or: [{role: Template.instance().role.get()}, {role: ''}]}, {sort: {category: 1, priority: -1}})
               .map(function(question) {
                 question.applicant_id = Template.instance().applicant.get('id');
                 return question;
