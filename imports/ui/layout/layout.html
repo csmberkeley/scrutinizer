@@ -1,36 +1,39 @@
 <template name="layout">
-  <nav>
-    <div class="nav-wrapper primary">
-      <span class="brand-logo center">{{title}}</span>
-      {{#if currentUser}}
-        <ul id="nav-mobile" class="left">
-          <li><a id="showReview" href="/review">Review</a></li>
-          <li><a id="showInterview" href="/interview">Interview</a></li>
-          <li><a id="showHistory" href="/history">History</a></li>
-        </ul>
-
-        <ul id="nav-mobile" class="right">
-          <li><a id="showMeta" href="/manage">Manage</a></li>
-          <li><a id="showQuestions" href="/questions">Edit Questions</a></li>
-          <li><a id="signout" href="/">Sign out {{name}}</a></li>
-        </ul>
-      {{/if}}
+  <nav class="nav has-shadow">
+    <div class="container">
+      <div class="nav-left">
+        {{#if currentUser}}
+        <a href="/review" class="nav-item is-tab">Review</a>
+        <a href="/interview" class="nav-item is-tab">Interview</a>
+        <a href="/history" class="nav-item is-tab">History</a>
+        {{/if}}
+      </div>
+      <div class="nav-center">
+        <a class="nav-item"><strong>Scrutinizer</strong></a>
+      </div>
+      <div class="nav-right">
+        {{#if currentUser}}
+        <a href="/manage" class="nav-item is-tab">Admin</a>
+        <a href="/questions" class="nav-item is-tab">Questions</a>
+        <a href="/" class="nav-item is-tab">Sign out {{name}}</a>
+        {{/if}}
+      </div>
     </div>
   </nav>
   <div class="container">
     {{#if currentUser}}
       {{> yield}}
     {{else}}
-      <div class="row">
-        <div class="col s12 m4 l2"></div>
-        <div class="col s12 m4 l8">
-          <div class="card white">
-            <div class="card-content black-text">
-              {{> loginForm}}
-            </div>
+    <div class="row">
+      <div class="col s12 m4 l2"></div>
+      <div class="col s12 m4 l8">
+        <div class="card white">
+          <div class="card-content black-text">
+            {{> loginForm}}
           </div>
         </div>
       </div>
+    </div>
     {{/if}}
   </div>
 </template>

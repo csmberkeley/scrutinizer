@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Applicants } from '../../../api/applicants.js';
 import { Roles } from '../../../api/roles.js';
-import { Materialize } from 'meteor/materialize:materialize';
 import './manage.html';
 import './manage.css';
 
@@ -47,7 +46,7 @@ Template.manage.events({
     Meteor.call('roles.remove', role, function(err) {
       if (err) {
         toast(err.reason);
-      } 
+      }
     });
   },
   'submit .role-submit'(event, instance) {
@@ -75,7 +74,7 @@ Template.manage.events({
     if (!role) {
       toast('Please select a role');
       return;
-    } 
+    }
     instance.uploading.set(true);
     selectElement.prop('disabled', true);
 
@@ -90,7 +89,7 @@ Template.manage.events({
             if (res.errors.length > 0) {
               toast('Some CSV rows had errors, see below');
               instance.uploadErrors.set(res.errors);
-            } 
+            }
             const count = res.applicants.length;
             toast('Parsed ' + count + ' applicants successfully, starting upload');
 

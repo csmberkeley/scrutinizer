@@ -1,4 +1,3 @@
-import { Materialize } from 'meteor/materialize:materialize';
 import { Session } from 'meteor/session';
 import './question.html';
 

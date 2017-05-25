@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-import { Materialize } from 'meteor/materialize:materialize';
 import { Approved } from '../../api/utils.js';
 import './loginForm.html';
 
