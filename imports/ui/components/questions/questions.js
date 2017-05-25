@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Questions } from '../../../api/questions.js';
 import { Roles } from '../../../api/roles.js';
-import { Materialize } from 'meteor/materialize:materialize';
 import { Session } from 'meteor/session';
 import './questions.html';
 import './questions.css';

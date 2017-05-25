@@ -5,7 +5,6 @@ import { Roles } from '../../../api/roles.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Interviewing } from '../../../api/interviewing.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
-import { Materialize } from 'meteor/materialize:materialize';
 import './interview.html';
 import './interview.scss';
 import './qna.js';

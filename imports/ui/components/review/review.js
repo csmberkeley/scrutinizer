@@ -4,7 +4,6 @@ import { Questions } from '../../../api/questions.js';
 import { Roles } from '../../../api/roles.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Interviewing } from '../../../api/interviewing.js';
-import { Materialize } from 'meteor/materialize:materialize';
 import './review.html';
 import './review.css';
 import './reviewRow.js';
@@ -143,4 +142,3 @@ Template.review.events({
     instance.showEmails.set(false);
   },
 });
-

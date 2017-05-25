@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Router } from 'meteor/iron:router';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 
@@ -7,20 +8,20 @@ import './layout.html';
 import './layout.scss';
 import './loginForm.js';
 
-Template.layout.onCreated(function bodyOnCreated() {
-  this.activeTemplate = new ReactiveVar('review');
-  this.title = new ReactiveVar('CSM Scrutinizer');
-
+Template.layout.onCreated(() => {
   Session.set('role', '');
   Session.set('lastQuestionCategory', '');
 });
 
 Template.layout.helpers({
   name() {
+    // Hacky solution to wait-on-user-subscription
+    let route = Router.current().route.getName();
+    if (!route) {
+      route = 'review';
+    }
+    $('a[href="/' + route + '"]').addClass('is-active');
     return Meteor.userId() && Meteor.user() && Meteor.user().username ? '(' + Meteor.user().username + ')' : '';
-  },
-  title() {
-    return Template.instance().title.get();
   },
 });
 
@@ -28,11 +29,8 @@ Template.layout.events({
   'click #signout'(event) {
     Meteor.logout();
   },
-  'click #nav-mobile a'(event, instance) {
-    if (event.target.getAttribute('id') === 'showInterview') {
-      instance.title.set('Remember to hit save!');
-    } else {
-      instance.title.set('CSM Scrutinizer');
-    }
+  'click .is-tab'(event) {
+    $('.is-tab').removeClass('is-active');
+    $(event.target).addClass('is-active');
   }
 });
