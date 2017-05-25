@@ -1,4 +1,9 @@
 import { Router } from 'meteor/iron:router';
+import './components/history/history.js';
+import './components/interview/interview.js';
+import './components/manage/manage.js';
+import './components/questions/questions.js';
+import './components/review/review.js';
 
 Router.configure({
   layoutTemplate: 'layout'
