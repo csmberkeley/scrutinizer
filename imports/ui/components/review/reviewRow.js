@@ -121,4 +121,3 @@ Template.reviewRow.events({
     instance.showMore.set(false);
   }
 });
-

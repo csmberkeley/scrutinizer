@@ -16,7 +16,6 @@ Template.review.onCreated(function() {
   Meteor.subscribe('interviewing.all');
   Meteor.subscribe('allUserData');
 
-  this.choosingRole = new ReactiveVar(true);
   this.role = new ReactiveVar('');
   this.showAccepted = new ReactiveVar(true);
   this.showRejected = new ReactiveVar(true);
@@ -29,9 +28,6 @@ Template.review.onRendered(function() {
 });
 
 Template.review.helpers({
-  choosingRole() {
-    return Template.instance().choosingRole.get();
-  },
   role() {
     return Template.instance().role.get();
   },
@@ -65,11 +61,7 @@ Template.review.helpers({
       applicant.interviewer_names = [];
       _.each(interviewings, function(i) {
         const usernameToPush = Meteor.users.findOne({ emails: { $elemMatch: { address: i.user_email } } }).username
-
         applicant.interviewer_names.push(usernameToPush);
-
-
-
         applicant.interviewers.push(i.user_email);
         applicant.scores.push(i.score);
         applicant.weight += i.score;
@@ -91,19 +83,20 @@ Template.review.helpers({
 });
 
 Template.review.events({
-  'click .collection-item'(event, instance) {
+  'click .role-select'(event, instance) {
     const role = $(event.target).text();
-
+    $('.role-tab').removeClass('is-active');
+    $(event.target).parent().addClass('is-active');
     instance.role.set(role);
-    instance.choosingRole.set(false);
   },
-  'click .change-button'(event, instance) {
-    instance.choosingRole.set(true);
-  },
-  'click #show-accepted'(event, instance) {
+  'click .show-accepted'(event, instance) {
+    event.preventDefault();
+    $(event.target).text(instance.showAccepted.get() ? 'Show accepted' : 'Hide accepted');
     instance.showAccepted.set(!instance.showAccepted.get());
   },
-  'click #show-rejected'(event, instance) {
+  'click .show-rejected'(event, instance) {
+    event.preventDefault();
+    $(event.target).text(instance.showAccepted.get() ? 'Show rejected' : 'Hide rejected');
     instance.showRejected.set(!instance.showRejected.get());
   },
   'click .collect-accepted'(event, instance) {
