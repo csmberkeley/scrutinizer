@@ -9,7 +9,7 @@
         {{/if}}
       </div>
       <div class="nav-center">
-        <a class="nav-item"><strong>Scrutinizer</strong></a>
+        <a class="nav-item"><h2 class="subtitle"><strong>Scrutinizer 2.0</strong></h2></a>
       </div>
       <div class="nav-right">
         {{#if currentUser}}
@@ -20,20 +20,22 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    {{#if currentUser}}
+      {{#if currentUser}}
       {{> yield}}
-    {{else}}
-    <div class="row">
-      <div class="col s12 m4 l2"></div>
-      <div class="col s12 m4 l8">
-        <div class="card white">
-          <div class="card-content black-text">
-            {{> loginForm}}
+      {{else}}
+      <section class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m4 l2"></div>
+            <div class="col s12 m4 l8">
+              <div class="card white">
+                <div class="card-content black-text">
+                  {{> loginForm}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    {{/if}}
-  </div>
+      </section>
+      {{/if}}
 </template>

@@ -1,5 +1,5 @@
 <template name="reviewRow">
-  <tr class="table-row {{statusClass}}">
+  <tr class="table-row {{statusClass}} {{#if showMore}}in-review{{/if}}">
     <td>
     <b>{{formattedScores}}</b>
     {{#if checkNoShow}}
@@ -11,30 +11,37 @@
     <td>{{year}}</td>
   </tr>
   {{#if showMore}}
-  <tr>
+  <tr class="in-review">
     <td colspan="4">
-    <a class="waves-effect waves-light btn primary accept">accept {{firstName}}</a>
-    <a class="waves-effect waves-light btn reject">reject</a>
-    <a class="waves-effect waves-light btn skip">skip</a>
-    <a class="waves-effect waves-light btn reset">reset</a>
-    {{#each notecards}}
-      <div class="card">
-        <div class="card-content">
-          <p class="interviewer">Interviewed by: {{interviewer_name}} ({{interviewer_score}})</p>
-          <br>
-          <p>{{{interviewer_notes}}}</p>
-        </div>
+      <div class="block">
+        <a class="button is-success is-medium accept">Accept</a>
+        <a class="button is-danger is-medium reject">Reject</a>
+        <a class="button is-primary is-medium reset">Reset</a>
       </div>
-    {{/each}}
-    {{#each answers}}
-      <div class="card">
-        <div class="card-content">
-          <p class="interviewer">{{question}}</p>
-          <br>
-          <p>{{{text}}}</p>
-        </div>
+      <div class="detail columns is-multiline">
+        {{#each notecards}}
+          <div class="column is-half">
+            <div class="box">
+              <p><strong>Notes from: {{interviewer_name}} ({{interviewer_score}})</strong></p>
+              <br>
+              <p>{{{interviewer_notes}}}</p>
+            </div>
+          </div>
+        {{/each}}
       </div>
-    {{/each}}
+      <div class="detail columns is-multiline">
+        {{#each answers}}
+        <div class="column is-half">
+          <div class="box">
+            <p>
+              <strong>{{question}}</strong>
+            </p>
+            <br>
+            <p>{{{text}}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
     </td>
   </tr>
   {{/if}}

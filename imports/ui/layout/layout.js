@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Session } from 'meteor/session';
 
 import './layout.html';
-import './layout.scss';
+import './layout.css';
 import './loginForm.js';
 
 Template.layout.onCreated(() => {
