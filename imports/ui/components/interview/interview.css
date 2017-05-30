@@ -1,0 +1,10 @@
+.applicant-item {
+  cursor: pointer;
+}
+.save-hidden {
+  visibility: hidden;
+  height: 0;
+}
+.save-global {
+  width: 100%;
+}

@@ -25,13 +25,13 @@ Template.guidelines.helpers({
 Template.guidelines.events({
   'click #hide.btn-guidelines'(event, instance) {
     $('.guidelines-card').animate({
-      height: 61 
+      height: 84
     });
     instance.showing.set(false);
   },
   'click #show.btn-guidelines'(event, instance) {
     $('.guidelines-card').animate({
-      height: 841
+      height: 1100
     });
     instance.showing.set(true);
   }

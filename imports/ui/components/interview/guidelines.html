@@ -1,13 +1,17 @@
 <template name="guidelines">
-  <div class="card">
-    <div class="guidelines-card card-content">
-      {{#if showing}}
-        <div id="hide" class="primary-t btn-guidelines">hide guidelines</div>
-        {{{html}}}
-        <div id="hide" class="primary-t btn-guidelines">hide guidelines</div>
-      {{else}}
-        <div id="show" class="primary-t btn-guidelines">show guidelines</div>
-      {{/if}}
+  <section class="hero is-light">
+    <div class="container">
+      <div class="guidelines-card card-content">
+        {{#if showing}}
+        <a id="hide" class="button btn-guidelines">Hide guidelines</a>
+        <div class="content">
+          {{{html}}}
+        </div>
+        <a id="hide" class="button btn-guidelines">Hide guidelines</a>
+        {{else}}
+        <a id="show" class="button btn-guidelines">Show guidelines</a>
+        {{/if}}
+      </div>
     </div>
-  </div>
+  </section>
 </template>

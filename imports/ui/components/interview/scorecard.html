@@ -1,0 +1,82 @@
+<template name="scorecard">
+  <section class="hero is-warning scorecard">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title">Score and Notes</h2>
+      </div>
+      <div class="save-hidden save-scorecard primary-t">save</div>
+    </div>
+    <div class="hero-foot">
+      <div class="container">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Score</label>
+          </div>
+          <div class="field-body">
+            <div class="field is-narrow">
+              <div class="control">
+                <label class="radio">
+                  <input id="score0" value="0" type="radio" name="scoreValue">
+                  0
+                </label>
+                <label class="radio">
+                  <input value="0.5" type="radio" name="scoreValue">
+                  0.5
+                </label>
+                <label class="radio">
+                  <input value="1" type="radio" name="scoreValue">
+                  1
+                </label>
+                <label class="radio">
+                  <input value="1.5" type="radio" name="scoreValue">
+                  1.5
+                </label>
+                <label class="radio">
+                  <input value="2" type="radio" name="scoreValue">
+                  2
+                </label>
+                <label class="radio">
+                  <input value="2.5" type="radio" name="scoreValue">
+                  2.5
+                </label>
+                <label class="radio">
+                  <input value="3" type="radio" name="scoreValue">
+                  3
+                </label>
+                <label class="radio">
+                  <input value="3.5" type="radio" name="scoreValue">
+                  3.5
+                </label>
+                <label class="radio">
+                  <input value="4" type="radio" name="scoreValue">
+                  4
+                </label>
+                <label class="radio">
+                  <input value="4.5" type="radio" name="scoreValue">
+                  4.5
+                </label>
+                <label class="radio">
+                  <input value="5" type="radio" name="scoreValue">
+                  5
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Notes</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <textarea class="interview-notes textarea" placeholder="Type your notes here"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+  </section>
+</template>
