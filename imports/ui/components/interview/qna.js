@@ -26,10 +26,15 @@ Template.qna.helpers({
       $('#answer-' + this._id).val(answer.text);
     }
   },
+  category() {
+    if (this.category && this.category.length > 0) {
+      return '(' + this.category + ')';
+    }
+  }
 });
 
 Template.qna.events({
-  'input .materialize-textarea'(event, instance) {
+  'input .textarea'(event, instance) {
     instance.modified.set(true);
   },
   'click .save-qna'(event, instance) {

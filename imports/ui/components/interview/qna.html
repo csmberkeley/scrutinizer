@@ -1,15 +1,8 @@
 <template name="qna">
-  <div class="qna-wrapper">
-    <p><span class="label">Question ({{category}}): </span> <b>{{text}}</b> <div class="save-hidden save-qna primary-t">save</div></p>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="answer-{{_id}}" class="materialize-textarea">{{answerTracker}}</textarea>
-            <label class="active" for="answer">Answer</label>
-          </div>
-        </div>
-      </form>
-    </div>
+  <div class="field">
+    <label class="label">Question {{category}}: <strong>{{text}}</strong> <div class="save-hidden save-qna primary-t">save</div></label>
+    <p class="control">
+      <textarea id="answer-{{_id}}" class="textarea" placeholder="Type here...">{{answerTracker}}</textarea>
+    </p>
   </div>
 </template>
