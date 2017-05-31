@@ -4,6 +4,7 @@ import { Questions } from '../../../api/questions.js';
 import { Roles } from '../../../api/roles.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Interviewing } from '../../../api/interviewing.js';
+import Toast from '../toaster/toaster.js';
 import './review.html';
 import './review.css';
 import './reviewRow.js';
@@ -113,7 +114,7 @@ Template.review.events({
     });
     instance.emails.set(emails);
     instance.showEmails.set(true);
-    Materialize.toast('Collecting ' + count + ' acceptances', 4000);
+    Toast('Collecting ' + count + ' acceptances', 4000);
   },
   'click .collect-non'(event, instance) {
     const emails = [];
@@ -129,7 +130,7 @@ Template.review.events({
     });
     instance.emails.set(emails);
     instance.showEmails.set(true);
-    Materialize.toast('Collecting ' + count + ' rejections', 4000);
+    Toast('Collecting ' + count + ' rejections', 4000);
   },
   'click .exit-emails'(event, instance) {
     instance.showEmails.set(false);

@@ -1,5 +1,6 @@
 import { Questions } from '../../../api/questions.js';
 import { Answers } from '../../../api/answers.js';
+import Toast from '../toaster/toaster.js';
 import './reviewRow.html';
 
 Template.reviewRow.onCreated(function() {
@@ -82,9 +83,9 @@ Template.reviewRow.events({
       status: 'accepted'
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       } else {
-        Materialize.toast('Saved acceptance', 4000);
+        Toast('Saved acceptance', 4000);
       }
     });
     instance.currStatus.set('accepted');
@@ -97,9 +98,9 @@ Template.reviewRow.events({
       status: 'rejected'
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       } else {
-        Materialize.toast('Saved rejection', 4000);
+        Toast('Saved rejection', 4000);
       }
     });
     instance.currStatus.set('rejected');
@@ -112,9 +113,9 @@ Template.reviewRow.events({
       status: 'pending'
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       } else {
-        Materialize.toast('Succesfully Reset', 4000);
+        Toast('Succesfully Reset', 4000);
       }
     });
     instance.currStatus.set('pending');

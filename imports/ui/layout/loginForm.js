@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Approved } from '../../api/utils.js';
+import Toast from '../components/toaster/toaster.js';
 import './loginForm.html';
 
 Template.loginForm.onCreated(function() {
@@ -28,14 +29,14 @@ Template.loginForm.events({
     const password = $('#password').val();
 
     if (email.length === 0 || password.length === 0) {
-      Materialize.toast('Fields cannot be empty', 4000);
+      Toast('Fields cannot be empty', 4000);
       return;
     }
 
     if (!isCreating) {
       Meteor.loginWithPassword(email, password, function(err) {
         if (err) {
-          Materialize.toast(err.reason, 4000);
+          Toast(err.reason, 4000);
         }
       });
     } else {
@@ -43,17 +44,17 @@ Template.loginForm.events({
       const passwordAgain = $('#password-again').val();
 
       if (name.length === 0 || passwordAgain.length === 0) {
-        Materialize.toast('Fields cannot be empty', 4000);
+        Toast('Fields cannot be empty', 4000);
         return;
       }
       if (password !== passwordAgain) {
-        Materialize.toast('Password do not match', 4000);
+        Toast('Password do not match', 4000);
         return;
       }
 
       const approved = Approved.findOne({email: email});
       if (!approved) {
-        Materialize.toast('Email is not approved', 4000);
+        Toast('Email is not approved', 4000);
         return;
       }
 
@@ -63,7 +64,7 @@ Template.loginForm.events({
         password: password
       }, function(err) {
         if (err) {
-          Materialize.toast(err.reason, 4000);
+          Toast(err.reason, 4000);
         }
       });
     }

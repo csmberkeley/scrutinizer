@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Questions } from '../../../api/questions.js';
 import { Roles } from '../../../api/roles.js';
 import { Session } from 'meteor/session';
+import Toast from '../toaster/toaster.js';
 import './questions.html';
 import './questions.css';
 import './question.js';
@@ -50,7 +51,7 @@ Template.questions.events({
   'click .add-question'(event, instance) {
     Meteor.call('questions.new', {role: instance.role.get(), category: Session.get('lastQuestionCategory')}, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       }
     });
   },

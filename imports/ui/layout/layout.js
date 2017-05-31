@@ -7,10 +7,12 @@ import { Session } from 'meteor/session';
 import './layout.html';
 import './layout.css';
 import './loginForm.js';
+import '../components/toaster/toaster.js';
 
 Template.layout.onCreated(() => {
   Session.set('role', '');
   Session.set('lastQuestionCategory', '');
+  Session.set('toasts', []);
 });
 
 Template.layout.helpers({
@@ -30,6 +32,7 @@ Template.layout.events({
     Meteor.logout();
   },
   'click .is-tab'(event) {
+    Session.set('toasts', []);
     $('.is-tab').removeClass('is-active');
     $(event.target).addClass('is-active');
   }

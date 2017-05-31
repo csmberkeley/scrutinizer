@@ -1,4 +1,5 @@
 import { Session } from 'meteor/session';
+import Toast from '../toaster/toaster.js';
 import './question.html';
 
 Template.question.onCreated(function() {
@@ -54,5 +55,5 @@ Template.question.events({
 });
 
 function toast(s) {
-  Materialize.toast(s, 4000);
+  Toast(s, 4000);
 }
