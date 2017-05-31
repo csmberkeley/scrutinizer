@@ -1,0 +1,15 @@
+.input-csv {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.input-csv + label {
+  cursor: pointer;
+  display: inline-block;
+}
+.file-field {
+  padding-top: 38px;
+}

@@ -23,7 +23,7 @@ Template.layout.helpers({
       route = 'review';
     }
     $('a[href="/' + route + '"]').addClass('is-active');
-    return Meteor.userId() && Meteor.user() && Meteor.user().username ? '(' + Meteor.user().username + ')' : '';
+    return Meteor.userId() && Meteor.user() && Meteor.user().username ? '(' + Meteor.user().username.split(' ')[0] + ')' : '';
   },
 });
 

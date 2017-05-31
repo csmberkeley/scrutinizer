@@ -1,0 +1,75 @@
+<template name="positions">
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Manage Positions
+        </h1>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div class="field">
+            <label class="label">New Position*</label>
+            <p class="control">
+              <input class="role-input input is-primary" type="text" placeholder="Position name" />
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label class="label">Limit (optional)</label>
+            <p class="control">
+              <input class="limit-input input" type="text" placeholder="Number of spots" />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <p class="role-submit control">
+          <button class="button is-primary">Submit</button>
+        </p>
+        <p class="control">
+          <button class="button is-link">Cancel</button>
+        </p>
+      </div>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Limit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each position in roles}}
+          <tr position="{{position._id}}">
+            <td>{{position._id}}</td>
+            <td>{{position.limit}}</td>
+            <td><i class="delete-role fa fa-trash" aria-hidden="true"></i></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <div class="confirm-delete-modal modal">
+    <div class="modal-background cancel-delete"></div>
+    <div class="modal-content">
+      <div class="box">
+        <div class="content">
+          <p><strong>Are you sure you want to delete {{selectedRole}}?</strong></p>
+        </div>
+        <nav class="level is-mobile">
+          <a class="button is-primary confirm-delete">Confirm</a>
+          <a class="button is-danger cancel-delete">Cancel</a>
+        </nav>
+      </div>
+    </div>
+    <button class="modal-close cancel-delete"></button>
+  </div>
+</template>

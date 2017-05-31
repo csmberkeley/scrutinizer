@@ -1,9 +1,10 @@
 import { Router } from 'meteor/iron:router';
 import './components/history/history.js';
 import './components/interview/interview.js';
-import './components/manage/manage.js';
+import './components/import/import.js';
 import './components/questions/questions.js';
 import './components/review/review.js';
+import './components/positions/positions.js';
 
 Router.configure({
   layoutTemplate: 'layout'
@@ -17,8 +18,12 @@ Router.route('/review', function() {
   this.render('review');
 });
 
-Router.route('/manage', function() {
-  this.render('manage');
+Router.route('/import', function() {
+  this.render('import');
+});
+
+Router.route('/positions', function() {
+  this.render('positions');
 });
 
 Router.route('/interview', function() {

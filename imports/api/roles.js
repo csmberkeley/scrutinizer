@@ -30,7 +30,7 @@ Meteor.methods({
     }
 
     Roles.insert({_id: id, limit: limit});
-  }, 
+  },
   'roles.remove'(id) {
     requireLogin(this.userId);
     check(id, String);
