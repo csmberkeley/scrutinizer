@@ -1,0 +1,7 @@
+<template name="toaster">
+  <div class="toaster-container">
+    {{#each t in toasts}}
+      {{> toast id=t.id text=t.text delay=t.delay type=t.type}}
+    {{/each}}
+  </div>
+</template>

@@ -15,11 +15,12 @@
         {{#if currentUser}}
         <a href="/manage" class="nav-item is-tab">Admin</a>
         <a href="/questions" class="nav-item is-tab">Questions</a>
-        <a href="/" class="nav-item is-tab">Sign out {{name}}</a>
+        <a id="signout" href="/" class="nav-item is-tab">Sign out {{name}}</a>
         {{/if}}
       </div>
     </div>
   </nav>
+  {{> toaster}}
       {{#if currentUser}}
       {{> yield}}
       {{else}}

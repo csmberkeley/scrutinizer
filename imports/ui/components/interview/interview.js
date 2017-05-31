@@ -5,6 +5,7 @@ import { Roles } from '../../../api/roles.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Interviewing } from '../../../api/interviewing.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import Toast from '../toaster/toaster.js';
 import './interview.html';
 import './interview.css';
 import './qna.js';
@@ -68,9 +69,9 @@ Template.interview.helpers({
           notes
         }, function(err) {
           if (err) {
-            Materialize.toast(err.reason, 4000);
+            Toast(err.reason, 4000);
           } else {
-            Materialize.toast('Saved score and notes', 2000);
+            Toast('Saved score and notes', 2000);
           }
         });
       }
@@ -151,9 +152,7 @@ Template.interview.events({
       notes: $('#notes').val(),
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
-      } else {
-        Materialize.toast('Score Changed', 2000);
+        Toast(err.reason, 4000);
       }
     });
     // Sets the score for the Interviewer and updates bar.
@@ -165,9 +164,9 @@ Template.interview.events({
       status: 'no-show',
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       } else {
-        Materialize.toast('Set status to No Show', 2000);
+        Toast('Marked as no-show', 3000);
       }
     });
   },

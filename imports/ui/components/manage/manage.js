@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Applicants } from '../../../api/applicants.js';
 import { Roles } from '../../../api/roles.js';
+import Toast from '../toaster/toaster.js';
 import './manage.html';
 import './manage.css';
 
@@ -110,5 +111,5 @@ Template.manage.events({
 });
 
 function toast(s) {
-  Materialize.toast(s, 4000);
+  Toast(s, 4000);
 }

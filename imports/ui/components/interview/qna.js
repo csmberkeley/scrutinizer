@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Answers } from '../../../api/answers.js';
+import Toast from '../toaster/toaster.js';
 
 import './qna.html';
 
@@ -48,9 +49,9 @@ Template.qna.events({
       text: instance.$('#answer-' + this._id).val()
     }, function(err) {
       if (err) {
-        Materialize.toast(err.reason, 4000);
+        Toast(err.reason, 4000);
       } else {
-        Materialize.toast('Saved your answer!', 2000);
+        Toast('Saved your answer!', 2000);
         instance.modified.set(false);
       }
     });

@@ -1,0 +1,7 @@
+.toaster-container {
+  position: fixed;
+  width: 350px;
+  right: 24px;
+  margin-top: 24px;
+  z-index: 999;
+}
