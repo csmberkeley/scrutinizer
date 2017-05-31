@@ -3,27 +3,21 @@ import { Template } from 'meteor/templating';
 import { Applicants } from '../../../api/applicants.js';
 import { Roles } from '../../../api/roles.js';
 import Toast from '../toaster/toaster.js';
-import './manage.html';
-import './manage.css';
+import './import.html';
+import './import.css';
 
-Template.manage.onCreated(function() {
+Template.import.onCreated(function() {
+  Meteor.subscribe('roles');
+
+  this.choseRole = new ReactiveVar(false);
   this.uploading = new ReactiveVar(false);
   this.uploadErrors = new ReactiveVar([]);
 });
 
-Template.manage.onRendered(function() {
-  // Getting the correct selected option only works if options are rendered this way
-  Meteor.subscribe('roles', function() {
-    const roles = Roles.find({}).fetch();
-
-    _.each(roles, function(role) {
-      $('.role-select').append($('<option></option').attr('value', role._id).text(role._id));
-    });
-    $('.role-select').material_select();
-  });
-});
-
-Template.manage.helpers({
+Template.import.helpers({
+  choseRole() {
+    return Template.instance().choseRole.get();
+  },
   uploading() {
     return Template.instance().uploading.get();
   },
@@ -38,39 +32,16 @@ Template.manage.helpers({
   },
 });
 
-Template.manage.events({
-  'click .delete-role'(event, instance) {
-    var role = $(event.target).parent().text();
-    role = role.replace(/\(.*\)/, '');
-    role = role.substring(0, role.length - 1);
-
-    Meteor.call('roles.remove', role, function(err) {
-      if (err) {
-        toast(err.reason);
-      }
-    });
-  },
-  'submit .role-submit'(event, instance) {
-    event.preventDefault();
-    const role = $('#role-input').val();
-    var limit = parseInt($('#limit-input').val());
-    if (limit === NaN) {
-      limit = undefined;
-    }
-
-    Meteor.call('roles.new', {id: role, limit: limit}, function(err) {
-      if (err) {
-        toast(err.reason);
-      }
-    });
-    $('#role-input').val('');
-    $('#limit-input').val('')
+Template.import.events({
+  'change .role-select'(event, instance) {
+    console.log('chagned');
+    instance.choseRole.set(true);
   },
   'change .input-csv'(event, instance) {
     event.preventDefault();
 
-    var selectElement = $('.role-select option:selected');
-    var role = selectElement.text();
+    var selectElement = $('.role-select');
+    var role = $('.role-select option:selected').val();
 
     if (!role) {
       toast('Please select a role');
@@ -98,7 +69,7 @@ Template.manage.events({
               if (err) {
                 toast(err.reason);
               } else {
-                toast('Updated ' + updateCount + ' applicants, inserted ' + (count - updateCount) + ' applicants');
+                toast('Modified ' + updateCount + ' existing applicants, inserted ' + (count - updateCount) + ' new applicants');
               }
               instance.uploading.set(false);
               selectElement.prop('disabled', false);

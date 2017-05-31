@@ -1,5 +1,60 @@
-<template name="manage">
-  <div class="content">
+<template name="import">
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Import Applicants
+        </h1>
+        <div class="columns">
+          <div class="column is-half">
+            <h2>
+              This utility adds applicants to the database through a CSV file. The CSV should have <b>no header row</b> and have columns in the order of: <b>Name, Email, Year</b>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="container">
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <div class="field">
+                <label class="label">Import to the position of: </label>
+                <p class="control">
+                  <span class="select">
+                    <select class="role-select">
+                      <option value="" selected="true" disabled="disabled">Choose position: </option>
+                      {{#each r in roles}}
+                      <option value="{{r._id}}">{{r._id}}</option>
+                      {{/each}}
+                    </select>
+                  </span>
+                </p>
+              </div>
+            </div>
+            {{#if choseRole}}
+            <div class="level-item">
+              <div class="file-field field">
+                <label class="label" for="file"><a class="button is-light">Choose file</a></label>
+                <p class="control">
+                  {{#unless uploading}}
+                  <input type="file" name="file" id="file" class="input-csv" />
+                  {{else}}
+                  <i class="fa fa-spin fa-refresh"></i> Uploading files...
+                  {{/unless}}
+                </p>
+              </div>
+            </div>
+            {{/if}}
+          </div>
+        </nav>
+      </div>
+      <br />
+    </div>
+  </section>
+
+  <!-- <div class="content">
     <div class="row">
       <div class="col s12 m6">
         <div class="card">
@@ -77,5 +132,5 @@
       </div>
     </div>
     {{/if}}
-  </div>
+  </div> -->
 </template>
