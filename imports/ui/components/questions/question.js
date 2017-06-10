@@ -45,7 +45,7 @@ Template.question.events({
   'click .exit'(event, instance) {
     instance.editing.set(false);
   },
-  'click .delete'(event, instance) {
+  'click .remove'(event, instance) {
     Meteor.call('questions.remove', this._id, function(err) {
       if (err) {
         toast(err.reason);
@@ -55,5 +55,5 @@ Template.question.events({
 });
 
 function toast(s) {
-  Toast(s, 4000);
+  Toast(s, 2500);
 }

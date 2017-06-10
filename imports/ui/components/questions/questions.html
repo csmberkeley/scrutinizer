@@ -1,5 +1,58 @@
 <template name="questions">
-  <div class="content">
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Edit Questions
+        </h1>
+        <h2 class="subtitle">
+          Select a position on the left to edit
+        </h2>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+    <div class="columns">
+      <div class="column is-3">
+        <aside class="menu">
+          <p class="menu-label">
+            Positions
+          </p>
+          <ul class="menu-list">
+            <li><a class="questions-role-item">All</a></li>
+            {{#each r in roles}}
+            <li><a class="questions-role-item">{{r._id}}</a></li>
+            {{/each}}
+          </ul>
+        </aside>
+      </div>
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th data-field="text">Text</th>
+                  <th data-field="category">Category</th>
+                  <th data-field="priority">priority</th>
+                  <th data-field="delete"><i class="fa fa-trash" aria-hidden="true"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each questions}}
+                  {{> question}}
+                {{/each}}
+              </tbody>
+            </table>
+            <a class="add-question button is-primary">+ Add Question</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+  <!-- <div class="content">
     {{#if choosingRole}}
     <div class="questions-header">
       <div class="card-panel">
@@ -36,7 +89,7 @@
       </div>
     </div>
     {{/if}}
-  </div>
+  </div> -->
   {{#each toast in toasts}}
     {{> toast}}
   {{/each}}

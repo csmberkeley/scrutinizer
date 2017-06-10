@@ -7,14 +7,11 @@ A fancier name for "Interviewer". Intended to be used internally for CSM leaders
 3. Run `meteor`. You can keep this running as you make changes; Meteor automatically refreshes the web server.
 
 ## File Structure
-- `imports/api` - Model layer for object CRUD
+- `imports/api` - Models
 - `imports/ui/components` - directories divided by feature name
-  - `layout` defines overall layout and wraps individual feature templates
-    - Global events or helpers should go in `layout.js`
-  - Feature's controller logic + Blaze template should only go in its directory
-  - Feature-specific CSS should go in corresponding folder and be imported by corresponding `.js` file
-- `imports/ui/components/layouts/layout.routes.js` - Routes are here
-- `client` - global CSS should go in here. 
+- `imports/ui/layout` defines overall layout and wraps individual feature templates
+- `imports/ui/routes.js` - Routes
+- `client` - Nothing should really go here
 - `server` - imports
 - [More notes from Meteor docs](https://guide.meteor.com/structure.html)
 

@@ -2,6 +2,40 @@
   <tr>
     {{#if editing}}
     <td colspan="4">
+      <div class="notification is-primary">
+        <button class="delete exit"></button>
+        <div><strong>Press ENTER to save changes</strong></div>
+        <br />
+        <div class="field">
+          <label class="label">Text*</label>
+          <p class="control">
+            <input id="text" class="input" value="{{text}}" type="text" placeholder="Question...">
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Category (optional)</label>
+          <p class="control">
+            <input id="category" class="input" value="{{category}}" type="text" placeholder="Category...">
+          </p>
+        </div>
+        <div class="field">
+          <label class="label">Priority (optional, higher means closer to the top)</label>
+          <p class="control">
+            <input id="priority" class="input" value="{{priority}}" type="number" placeholder="priority">
+          </p>
+        </div>
+      </div>
+    </td>
+    {{else}}
+    <td class="edit-region">{{text}}</td>
+    <td class="edit-region">{{category}}</td>
+    <td class="edit-region">{{priority}}</td>
+    <td><i class="remove fa fa-trash" aria-hidden="true"></i></td>
+    {{/if}}
+  </tr>
+  <!-- <tr>
+    {{#if editing}}
+    <td colspan="4">
       <div class="row edit-question">
         <div class="usage"><p>Press ENTER to save changes<i class="exit fa fa-times-circle fa-2x" aria-hidden="true"></i></p></div>
         <br>
@@ -31,5 +65,5 @@
     <td class="edit-region">{{priority}}</td>
     <td><i class="delete fa fa-trash" aria-hidden="true"></i></td>
     {{/if}}
-  </tr>
+  </tr> -->
 </template>
