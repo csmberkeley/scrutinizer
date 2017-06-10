@@ -7,15 +7,8 @@ Template.reviewRow.onCreated(function() {
   Meteor.subscribe('questions');
   Meteor.subscribe('answers');
 
-  this.showMore = new ReactiveVar(false);
-  this.currStatus = new ReactiveVar('pending');
-});
-
-Template.reviewRow.onRendered(function() {
   const context = Template.currentData();
-  if (context) {
-    this.currStatus.set(context.status);
-  }
+  this.showMore = new ReactiveVar(false);
 });
 
 Template.reviewRow.helpers({
@@ -23,16 +16,12 @@ Template.reviewRow.helpers({
     return this.name.split(' ')[0];
   },
   statusClass() {
-    const status = Template.instance().currStatus.get();
+    const status = this.status;
     if (status === 'accepted' || status === 'rejected' || status === 'no-show') {
       return status;
     } else {
       return '';
     }
-  },
-  checkNoShow() {
-    const status = Template.instance().currStatus.get();
-    return status === 'no-show';
   },
   formattedScores() {
     var ret = '';
@@ -72,9 +61,6 @@ Template.reviewRow.events({
   },
   'click .skip'(event, instance) {
     instance.showMore.set(false);
-    $('html, body').animate({
-      scrollTop: $(event.target).offset().top
-    }, 400);
   },
   'click .accept'(event, instance) {
     Meteor.call('applicants.setStatus', {
@@ -88,7 +74,6 @@ Template.reviewRow.events({
         Toast('Saved acceptance', 4000);
       }
     });
-    instance.currStatus.set('accepted');
     instance.showMore.set(false);
   },
   'click .reject'(event, instance) {
@@ -103,7 +88,6 @@ Template.reviewRow.events({
         Toast('Saved rejection', 4000);
       }
     });
-    instance.currStatus.set('rejected');
     instance.showMore.set(false);
   },
   'click .reset'(event, instance) {
@@ -118,7 +102,6 @@ Template.reviewRow.events({
         Toast('Succesfully Reset', 4000);
       }
     });
-    instance.currStatus.set('pending');
     instance.showMore.set(false);
   }
 });
