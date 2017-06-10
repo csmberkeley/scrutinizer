@@ -97,7 +97,7 @@ Template.review.events({
   },
   'click .show-rejected'(event, instance) {
     event.preventDefault();
-    $(event.target).text(instance.showAccepted.get() ? 'Show rejected' : 'Hide rejected');
+    $(event.target).text(instance.showRejected.get() ? 'Show rejected' : 'Hide rejected');
     instance.showRejected.set(!instance.showRejected.get());
   },
   'click .collect-accepted'(event, instance) {

@@ -1,4 +1,4 @@
-.detail {
+  .detail {
   color: #363636;
 }
 .table .accepted.in-review:hover, .table .rejected.in-review:hover, .table .in-review:hover {
@@ -10,8 +10,8 @@
 .rejected, .table .rejected:hover {
   background-color: #EF9A9A;
 }
-.in-review {
-  background-image: linear-gradient(141deg, #009e6c 0%, #00d1b2 71%, #00e7eb 100%);
+.review-details, .table .review-details:hover{
+  background-color: #E0E0E0;
 }
 .table-row.in-review {
   background: #00d1b2;

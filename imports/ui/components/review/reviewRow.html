@@ -11,12 +11,13 @@
     <td>{{year}}</td>
   </tr>
   {{#if showMore}}
-  <tr class="in-review">
+  <tr class="review-details">
     <td colspan="4">
       <div class="block">
         <a class="button is-success is-medium accept">Accept</a>
         <a class="button is-danger is-medium reject">Reject</a>
         <a class="button is-primary is-medium reset">Reset</a>
+        <a class="button is-primary is-medium is-inverted skip">Skip</a>
       </div>
       <div class="detail columns is-multiline">
         {{#each notecards}}
