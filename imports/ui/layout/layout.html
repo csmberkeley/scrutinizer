@@ -22,22 +22,9 @@
     </div>
   </nav>
   {{> toaster}}
-      {{#if currentUser}}
-      {{> yield}}
-      {{else}}
-      <section class="section">
-        <div class="container">
-          <div class="row">
-            <div class="col s12 m4 l2"></div>
-            <div class="col s12 m4 l8">
-              <div class="card white">
-                <div class="card-content black-text">
-                  {{> loginForm}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      {{/if}}
+  {{#if currentUser}}
+    {{> yield}}
+  {{else}}
+    {{> loginForm}}
+  {{/if}}
 </template>

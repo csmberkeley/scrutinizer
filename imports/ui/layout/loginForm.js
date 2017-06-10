@@ -22,8 +22,12 @@ Template.loginForm.events({
   'click #signup'(event, instance) {
     instance.creating.set(!instance.creating.get());
   },
-  'submit .login-form'(event, instance) {
+  'keyup input, click .submit'(event, instance) {
     event.preventDefault();
+    if (event.type !== 'click' && event.which !== 13) {
+      return;
+    }
+    event.stopPropagation();
     const isCreating = instance.creating.get();
     const email = $('#email').val();
     const password = $('#password').val();
@@ -64,7 +68,7 @@ Template.loginForm.events({
         password: password
       }, function(err) {
         if (err) {
-          Toast(err.reason, 4000);
+          Toast('Username or password is invalid', 4000);
         }
       });
     }
