@@ -11,14 +11,14 @@ Template.questions.onCreated(function() {
   Meteor.subscribe('roles');
   Meteor.subscribe('questions');
 
-  this.choosingRole = new ReactiveVar(false);
   this.role = new ReactiveVar(Session.get('role'));
 });
 
+Template.questions.onRendered(function() {
+  $('.questions-role-item').first().click();
+});
+
 Template.questions.helpers({
-  choosingRole() {
-    return Template.instance().choosingRole.get();
-  },
   role() {
     const currRole = Template.instance().role.get();
     if (currRole) {
@@ -35,18 +35,16 @@ Template.questions.helpers({
 });
 
 Template.questions.events({
-  'click .collection-item'(event, instance) {
+  'click .questions-role-item'(event, instance) {
     const role = $(event.target).text();
+    $('.questions-role-item').removeClass('is-active');
+    $(event.target).addClass('is-active');
 
     if (role === 'All') {
       instance.role.set('');
     } else {
       instance.role.set(role);
     }
-    instance.choosingRole.set(false);
-  },
-  'click .change-button'(event, instance) {
-    instance.choosingRole.set(true);
   },
   'click .add-question'(event, instance) {
     Meteor.call('questions.new', {role: instance.role.get(), category: Session.get('lastQuestionCategory')}, function(err) {
