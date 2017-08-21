@@ -1,7 +1,7 @@
 <template name="layout">
   <nav class="nav has-shadow">
     <div class="container">
-      <div class="nav-left">
+      <div class="navbar-start">
         {{#if currentUser}}
         <a href="/review" class="nav-item is-tab">Review</a>
         <a href="/interview" class="nav-item is-tab">Interview</a>
@@ -11,11 +11,18 @@
       <div class="nav-center">
         <a class="nav-item"><h2 class="subtitle"><strong>Scrutinizer 2.0</strong></h2></a>
       </div>
-      <div class="nav-right">
+      <div class="navbar-end">
         {{#if currentUser}}
-        <a href="/import" class="nav-item is-tab">Import</a>
-        <a href="/positions" class="nav-item is-tab">Positions</a>
-        <a href="/questions" class="nav-item is-tab">Questions</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link is-active">
+            Manage
+          </a>
+          <div class="navbar-dropdown">
+            <a href="/import" class="navbar-item">Import</a>
+            <a href="/positions" class="navbar-item">Positions</a>
+            <a href="/questions" class="navbar-item">Questions</a>
+          </div>
+        </div>
         <a id="signout" href="/" class="nav-item is-tab">Sign out {{name}}</a>
         {{/if}}
       </div>
