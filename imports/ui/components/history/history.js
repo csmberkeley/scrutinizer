@@ -2,6 +2,8 @@ import { Template } from 'meteor/templating';
 import { Interviewing } from '../../../api/interviewing.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Router } from 'meteor/iron:router';
+import { Session } from 'meteor/session';
+import Toast from '../toaster/toaster.js';
 import './history.html';
 
 Template.history.onCreated(function() {
@@ -28,7 +30,7 @@ Template.history.helpers({
 Template.history.events({
   'click .interviews-row'(event) {
     event.preventDefault();
-    const row = $(event.target);
+    const row = $(event.target).closest('a');
     const name = row.attr('name');
     const role = row.attr('role');
 
