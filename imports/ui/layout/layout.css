@@ -1,3 +1,9 @@
 .submit {
   min-width: 100%;
 }
+.navbar-dropdown {
+  z-index: 99;
+}
+.table {
+  width: 100%;
+}
