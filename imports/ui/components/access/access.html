@@ -1,0 +1,42 @@
+<template name="access">
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Manage Scrutinizer Access
+        </h1>
+        <h2>Email addresses that are not on this list will not be able to create an account</h2>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container access-container">
+      <div class="field">
+        <label class="label">Add email address:</label>
+        <p class="control">
+          <input class="access-input input is-primary" type="text" placeholder="Email" />
+        </p>
+      </div>
+      <div class="field is-grouped">
+        <p class="access-submit control">
+          <button class="button is-primary">Add</button>
+        </p>
+      </div>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Allowed email addresses</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each user in approved}}
+          <tr>
+            <td>{{user.email}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</template>

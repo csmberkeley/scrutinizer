@@ -1,5 +1,6 @@
 import { Router } from 'meteor/iron:router';
 import './components/history/history.js';
+import './components/access/access.js';
 import './components/interview/interview.js';
 import './components/import/import.js';
 import './components/questions/questions.js';
@@ -36,4 +37,8 @@ Router.route('/questions', function() {
 
 Router.route('/history', function() {
   this.render('history');
+});
+
+Router.route('/access', function() {
+  this.render('access');
 });
