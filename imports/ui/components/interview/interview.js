@@ -5,6 +5,7 @@ import { Roles } from '../../../api/roles.js';
 import { Applicants } from '../../../api/applicants.js';
 import { Interviewing } from '../../../api/interviewing.js';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import { Session } from 'meteor/session';
 import Toast from '../toaster/toaster.js';
 import './interview.html';
 import './interview.css';
@@ -27,29 +28,40 @@ Template.interview.onCreated(function() {
   });
 
   this.nameInput = new ReactiveVar('');
-  this.nameSelected = false;
   this.roleSelected = new ReactiveVar(false);
 
+  // Start autosave even if button not there
+  this.autosaveId = setInterval(function() {
+    if ($('.save-global').length) {
+      $('.save-global').click();
+      Toast('Autosaving...', 1000);
+    }
+  }, 30000);
+});
+
+Template.interview.onRendered(function() {
   // This is for href from /history selection
   if (Session.get('historyRole') && Session.get('historyName')) {
-    this.choosingApplicant = new ReactiveVar(false);
     const self = this;
 
     Meteor.subscribe('applicants', function() {
       const applicant = Applicants.findOne({name: Session.get('historyName')})
       self.applicant.set('name', applicant.name);
       self.applicant.set('id', applicant._id);
-      self.nameSelected = true;
-      doneSelecting(self);
+      showInterview(self);
     });
 
     this.role.set(Session.get('historyRole'));
-    this.roleSelected = true;
-    doneSelecting(this);
-
+    this.roleSelected.set(true);
+    $('.role-select').val(Session.get('historyRole'));
+    showInterview(this);
   } else {
     Meteor.subscribe('applicants');
   }
+});
+
+Template.interview.onDestroyed(function() {
+  clearInterval(this.autosaveId);
 });
 
 Template.interview.helpers({
@@ -120,24 +132,8 @@ Template.interview.events({
     const name = target.text();
     instance.applicant.set('name', name);
     instance.applicant.set('id', target.attr('email'));
-    $('#name').val(name);
 
-    instance.choosingApplicant.set(false);
-    instance.nameInput.set('');
-
-    const interviewing = Interviewing.findOne({
-      user_email: Meteor.user().emails[0].address,
-      applicant_id: instance.applicant.get('id'),
-      role: instance.role.get()
-    });
-
-    if (interviewing) {
-      instance.interviewing.set('score', interviewing.score);
-      instance.interviewing.set('notes', interviewing.notes);
-    } else {
-      instance.interviewing.set('score', 3);
-      instance.interviewing.set('notes', '');
-    }
+    showInterview(instance);
   },
   'change .role-select'(event, instance) {
     const name = $(event.target).val();
@@ -175,6 +171,28 @@ Template.interview.events({
   },
 });
 
-function doneSelecting(instance) {
+function showInterview(instance) {
+  var applicant_id = instance.applicant.get('id');
+  var role = instance.role.get();
 
+  if (!applicant_id || !role || applicant_id.length === 0 || role.length === 0) {
+    return;
+  }
+  $('#name').val(instance.applicant.get('name'));
+  instance.choosingApplicant.set(false);
+  instance.nameInput.set('');
+
+  const interviewing = Interviewing.findOne({
+    user_email: Meteor.user().emails[0].address,
+    applicant_id,
+    role
+  });
+
+  if (interviewing) {
+    instance.interviewing.set('score', interviewing.score);
+    instance.interviewing.set('notes', interviewing.notes);
+  } else {
+    instance.interviewing.set('score', 3);
+    instance.interviewing.set('notes', '');
+  }
 }

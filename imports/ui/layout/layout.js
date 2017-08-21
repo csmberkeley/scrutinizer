@@ -13,6 +13,8 @@ Template.layout.onCreated(() => {
   Session.set('role', '');
   Session.set('lastQuestionCategory', '');
   Session.set('toasts', []);
+  Session.set('historyName', '');
+  Session.set('historyRole', '');
 });
 
 Template.layout.helpers({
