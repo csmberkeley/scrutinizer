@@ -19,6 +19,7 @@ Template.review.onCreated(function() {
 
   this.role = new ReactiveVar('');
   this.showAccepted = new ReactiveVar(true);
+  this.showWaitlisted = new ReactiveVar(true);
   this.showRejected = new ReactiveVar(true);
   this.showEmails = new ReactiveVar(false);
   this.emails = new ReactiveVar([]);
@@ -44,13 +45,14 @@ Template.review.helpers({
   applicants() {
     const instance = Template.instance();
     const hideAccepted = !instance.showAccepted.get();
+    const hideWaitlisted = !instance.showWaitlisted.get();
     const hideRejected = !instance.showRejected.get();
 
     const all = Applicants.find({roles: instance.role.get()}).map(function(applicant) {
       applicant.role = instance.role.get();
       const idx = applicant.roles.indexOf(applicant.role);
       applicant.status = applicant.statuses[idx];
-      if (hideAccepted && applicant.status === 'accepted' || hideRejected && applicant.status === 'rejected') {
+      if (hideAccepted && applicant.status === 'accepted' || hideWaitlisted && applicant.status === 'waitlisted' || hideRejected && applicant.status === 'rejected') {
         return;
       }
 
@@ -95,6 +97,11 @@ Template.review.events({
     $(event.target).text(instance.showAccepted.get() ? 'Show accepted' : 'Hide accepted');
     instance.showAccepted.set(!instance.showAccepted.get());
   },
+  'click .show-waitlisted'(event, instance) {
+    event.preventDefault();
+    $(event.target).text(instance.showWaitlisted.get() ? 'Show waitlisted' : 'Hide waitlisted');
+    instance.showWaitlisted.set(!instance.showWaitlisted.get());
+  },
   'click .show-rejected'(event, instance) {
     event.preventDefault();
     $(event.target).text(instance.showRejected.get() ? 'Show rejected' : 'Hide rejected');
@@ -116,6 +123,22 @@ Template.review.events({
     instance.showEmails.set(true);
     Toast('Collecting ' + count + ' acceptances', 4000);
   },
+  'click .collect-wl'(event, instance) {
+    const emails = [];
+    const role = instance.role.get();
+    var count = 0;
+
+    Applicants.find({roles: role}).forEach(function(applicant) {
+      const idx = applicant.roles.indexOf(role);
+      if (applicant.statuses[idx] === 'waitlisted') {
+        emails.push(applicant._id);
+        count++;
+      }
+    });
+    instance.emails.set(emails);
+    instance.showEmails.set(true);
+    Toast('Collecting ' + count + ' waitlists', 4000);
+  },
   'click .collect-non'(event, instance) {
     const emails = [];
     const role = instance.role.get();
@@ -123,7 +146,7 @@ Template.review.events({
 
     Applicants.find({roles: role}).forEach(function(applicant) {
       const idx = applicant.roles.indexOf(role);
-      if (applicant.statuses[idx] !== 'accepted') {
+      if (applicant.statuses[idx] === 'rejected') {
         emails.push(applicant._id);
         count++;
       }

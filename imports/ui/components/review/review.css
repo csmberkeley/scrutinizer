@@ -7,6 +7,9 @@
 .accepted, .table .accepted:hover {
   background-color: #C5E1A5;
 }
+.waitlisted, .table .waitlisted:hover {
+  background-color: #F0AD4E;
+}
 .rejected, .table .rejected:hover {
   background-color: #EF9A9A;
 }

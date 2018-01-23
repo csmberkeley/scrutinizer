@@ -17,7 +17,7 @@ Template.reviewRow.helpers({
   },
   statusClass() {
     const status = this.status;
-    if (status === 'accepted' || status === 'rejected' || status === 'no-show') {
+    if (status === 'accepted' || status == 'waitlisted' || status === 'rejected' || status === 'no-show') {
       return status;
     } else {
       return '';
@@ -72,6 +72,20 @@ Template.reviewRow.events({
         Toast(err.reason, 4000);
       } else {
         Toast('Saved acceptance', 4000);
+      }
+    });
+    instance.showMore.set(false);
+  },
+  'click .waitlist'(event, instance) {
+    Meteor.call('applicants.setStatus', {
+      id: this._id,
+      role: this.role,
+      status: 'waitlisted'
+    }, function(err) {
+      if (err) {
+        Toast(err.reason, 4000);
+      } else {
+        Toast('Saved waitlist', 4000);
       }
     });
     instance.showMore.set(false);
