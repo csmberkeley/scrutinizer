@@ -117,6 +117,7 @@ Template.review.events({
       const idx = applicant.roles.indexOf(role);
       if (applicant.statuses[idx] === 'accepted') {
         emails.push(applicant._id);
+        names.push(applicant.name);
         count++;
       }
     });
