@@ -108,7 +108,8 @@ Template.review.events({
     instance.showRejected.set(!instance.showRejected.get());
   },
   'click .collect-accepted'(event, instance) {
-    const emails = [];
+    var emails = [];
+    var names = []
     const role = instance.role.get();
     var count = 0;
 
@@ -119,12 +120,14 @@ Template.review.events({
         count++;
       }
     });
-    instance.emails.set(emails);
+    const name_and_emails = emails.concat(names)
+    instance.emails.set(name_and_emails);
     instance.showEmails.set(true);
     Toast('Collecting ' + count + ' acceptances', 4000);
   },
   'click .collect-wl'(event, instance) {
-    const emails = [];
+    var emails = [];
+    var names = []
     const role = instance.role.get();
     var count = 0;
 
@@ -132,15 +135,18 @@ Template.review.events({
       const idx = applicant.roles.indexOf(role);
       if (applicant.statuses[idx] === 'waitlisted') {
         emails.push(applicant._id);
+        names.push(applicant.name);
         count++;
       }
     });
-    instance.emails.set(emails);
+    const name_and_emails = emails.concat(names)
+    instance.emails.set(name_and_emails);
     instance.showEmails.set(true);
     Toast('Collecting ' + count + ' waitlists', 4000);
   },
   'click .collect-non'(event, instance) {
-    const emails = [];
+    var emails = [];
+    var names = []
     const role = instance.role.get();
     var count = 0;
 
@@ -148,10 +154,12 @@ Template.review.events({
       const idx = applicant.roles.indexOf(role);
       if (applicant.statuses[idx] === 'rejected') {
         emails.push(applicant._id);
+        names.push(applicant.name);
         count++;
       }
     });
-    instance.emails.set(emails);
+    const name_and_emails = emails.concat(names)
+    instance.emails.set(name_and_emails);
     instance.showEmails.set(true);
     Toast('Collecting ' + count + ' rejections', 4000);
   },
